@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cd46tfis4up1c"]
+
+[node name="RichTextLabel" type="RichTextLabel"]
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_filter = 1
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+scroll_following = true
+threaded = true

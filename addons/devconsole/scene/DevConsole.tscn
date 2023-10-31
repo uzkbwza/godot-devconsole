@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://l77l6cqe6otl"]
+
+[ext_resource type="Script" path="res://addons/devconsole/scene/console.gd" id="1_b68qa"]
+[ext_resource type="Theme" uid="uid://dtpjg03wqjrpf" path="res://addons/devconsole/scene/theme.tres" id="1_fsr8x"]
+
+[node name="DevConsole" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_fsr8x")
+script = ExtResource("1_b68qa")
+color_output = Color(0.67451, 0.67451, 0.67451, 1)
+color_input = Color(1, 1, 1, 1)
+color_error = Color(0.968627, 0.623529, 0.596078, 1)
+color_important = Color(0.933333, 0.913725, 0.733333, 1)
+color_important_2 = Color(0.643137, 0.788235, 0.529412, 1)
+color_title = Color(1, 0.929412, 0.478431, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MainBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LabelBox" type="VBoxContainer" parent="MarginContainer/MainBox/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/MainBox"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Control" type="Control" parent="MarginContainer/MainBox/LineEdit"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="SelectedLabel" type="Label" parent="MarginContainer/MainBox/LineEdit/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_top = 5.0
+offset_right = 1142.0
+offset_bottom = 26.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="gui_input" from="MarginContainer/MainBox/LineEdit" to="." method="_on_line_edit_gui_input"]
+[connection signal="text_changed" from="MarginContainer/MainBox/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="MarginContainer/MainBox/LineEdit" to="." method="_on_line_edit_text_submitted"]

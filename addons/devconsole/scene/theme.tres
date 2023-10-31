@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dtpjg03wqjrpf"]
+
+[ext_resource type="FontFile" uid="uid://bbueffwti5a14" path="res://addons/devconsole/scene/SourceCodePro-Medium.ttf" id="1_ctavc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_olyn1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ggol4"]
+bg_color = Color(0, 0, 0, 0.454902)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_55if3"]
+bg_color = Color(0, 0, 0, 0.823529)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_741lo"]
+
+[resource]
+default_font = ExtResource("1_ctavc")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_olyn1")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_ggol4")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_55if3")
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_741lo")

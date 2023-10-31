@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2rstndvhjfq1"]
+
+[ext_resource type="Script" path="res://addons/devconsole/devconsole-autoload.gd" id="1_tvjlf"]
+
+[node name="DevConsoleAutoload" type="Node"]
+script = ExtResource("1_tvjlf")
