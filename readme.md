@@ -1,6 +1,8 @@
 # godot devconsole
 this is a simple developer console for 2d games. you can execute registered commands or evaluate [Expressions](https://docs.godotengine.org/en/stable/tutorials/scripting/evaluating_expressions.html) as the selected node (falling back to the console node).
 
+just drop the addons folder in your project.
+
 https://github.com/uzkbwza/godot-devconsole/assets/43023911/352fc2af-a2aa-4b86-9eab-4cdca830adcf
 
 you can register a command from any script.
