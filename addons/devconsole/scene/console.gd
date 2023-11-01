@@ -17,6 +17,7 @@ const LINE_LABEL_SCENE = preload("res://addons/devconsole/scene/LineLabel.tscn")
 @onready var line_edit = %LineEdit
 @onready var selected_label = %SelectedLabel
 @onready var label_box = %LabelBox
+@onready var suggestion = %Suggestion
 
 var history: Array[String] = [""]
 var history_index = 0
@@ -28,6 +29,15 @@ var selected = null
 var selected_viewport: Viewport = null
 
 var label_text: String = ""
+
+var suggested:
+	get:
+		if current_suggestions:
+			return current_suggestions[suggested_index % current_suggestions.size()]
+		return ""
+var suggested_index = 0
+var current_suggestions = []
+var cycling_suggestions = false
 
 func _ready():
 	anchor_bottom = DevConsole.height_ratio
@@ -119,12 +129,48 @@ func _on_line_edit_gui_input(event):
 					_cycle_history(-1)
 				KEY_DOWN:
 					_cycle_history(1)
+				KEY_TAB:
+					autocomplete()
+
+func autocomplete():
+	if !current_suggestions:
+		return
+	if !cycling_suggestions:
+		suggested_index = -1
+	cycling_suggestions = true
+	suggested_index += 1
+	line_edit.text = suggested
+	suggest()
+	await get_tree().process_frame
+	line_edit.caret_column = 999999999
+
+func suggest():
+	var text = line_edit.text
+	suggestion.text = text
+	if text in current_suggestions:
+		return
+	current_suggestions = []
+	var add_suggestion = func(s: String):
+		if !s.begins_with(text):
+			return
+		if s in current_suggestions:
+			return
+		current_suggestions.append(s)
+	for command in DevConsole.commands:
+		add_suggestion.call(command)
+		for alias in DevConsole.commands[command].aliases:
+			add_suggestion.call(alias)
+	if suggested and text:
+		suggestion.text = suggested
 
 func _on_line_edit_text_changed(new_text):
 	if history.size() == 0:
 		return
 	if new_text != history[history_index]:
 		history_index = history.size() - 1
+	if !(line_edit.text in current_suggestions):
+		cycling_suggestions = false
+	suggest()
 
 func _on_rich_text_label_focus_entered():
 	line_edit.grab_focus()
